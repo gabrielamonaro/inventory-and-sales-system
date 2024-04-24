@@ -2,8 +2,11 @@ import React from "react";
 import { LiaUserTieSolid } from "react-icons/lia";
 import { Container, LinkStyled, ContainerOptions } from "./styles";
 import { CiBoxes } from "react-icons/ci";
-import { PiShirtFoldedLight, PiUsersThree } from "react-icons/pi";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+import {
+  PiShirtFoldedLight,
+  PiShoppingBag,
+  PiUsersThree,
+} from "react-icons/pi";
 
 interface ISidebarProps {
   selected: "sales" | "stock" | "products" | "partners" | "custmers";
@@ -16,7 +19,7 @@ const Sidebar: React.FC<ISidebarProps> = ({ selected }) => (
         _hover={{ textDecoration: "none" }}
         selected={selected === "sales"}
       >
-        <HiOutlineShoppingBag size={30} />
+        <PiShoppingBag size={30} />
         <p>Vendas</p>
       </LinkStyled>
       <LinkStyled
