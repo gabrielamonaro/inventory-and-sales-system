@@ -1,5 +1,7 @@
+import Sidebar from "../../Components/Sidebar";
+
 const StockPage: React.FC = () => {
-  return <h1>Stock</h1>;
+  return <Sidebar selected="stock" />;
 };
 
 export default StockPage;

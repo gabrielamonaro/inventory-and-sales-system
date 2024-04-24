@@ -1,5 +1,7 @@
+import Sidebar from "../../Components/Sidebar";
+
 const PartnersPage: React.FC = () => {
-  return <h1>Partners</h1>;
+  return <Sidebar selected="partners" />;
 };
 
 export default PartnersPage;

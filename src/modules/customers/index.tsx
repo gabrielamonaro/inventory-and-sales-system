@@ -1,5 +1,7 @@
+import Sidebar from "../../Components/Sidebar";
+
 const CustomersPage: React.FC = () => {
-  return <h1>Customers</h1>;
+  return <Sidebar selected="custmers" />;
 };
 
 export default CustomersPage;
