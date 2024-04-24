@@ -10,7 +10,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { IOrder } from "../../interfaces/IOrder";
-import { useCallback } from "react";
+import { useState } from "react";
 
 interface IField {
   name: string;
@@ -23,34 +23,39 @@ interface IMainTableProps {
   data: IOrder[];
 }
 const MainTable: React.FC<IMainTableProps> = ({ headers, data }) => {
-  const sumAll = useCallback(
-    ({ key }: { key: string }) => {
-      let sum = 0;
-
-      data.forEach((item) => {
-        sum = sum + item[key];
-      });
-      return sum;
-    },
-    [data]
-  );
-
+  const [selectedCell, setSelectedCell] = useState<string>();
   return (
-    <TableContainer marginLeft={"300px"} maxH="100%">
+    <TableContainer marginLeft={"280px"} maxH="100%">
       <Table
-        // variant="simple"
-        variant="striped"
-        colorScheme="teal"
+        variant="simple"
         border="1px solid lightgray"
         borderRadius="25px"
         p={20}
       >
-        <Box overflowY="scroll" maxH={"500px"} overflowX="hidden">
+        <Box
+          overflowY="scroll"
+          maxH={"70vh"}
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              borderRadius: "11.42px",
+              backgroundColor: "#eeeeee6e",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              borderRadius: "10px",
+              backgroundColor: "#eeeeee",
+            },
+          }}
+          overflowX="hidden"
+          scrollMargin={20}
+        >
           <Thead
             position="sticky"
             top={0}
             padding="12px"
-            border="1px solid red"
+            backgroundColor="white"
           >
             <Tr>
               {headers.map((item) => (
@@ -58,22 +63,35 @@ const MainTable: React.FC<IMainTableProps> = ({ headers, data }) => {
                   isNumeric={item.isNumeric}
                   textTransform="uppercase"
                   fontSize={12}
-                  p="0px 8px"
+                  p="8px"
+                  fontFamily="Roboto"
                 >
                   {item.name}
                 </Th>
               ))}
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody padding="32px">
             {data.map((item) => (
-              <Tr>
+              <Tr
+                _hover={{ backgroundColor: "#F4F4F4", cursor: "pointer" }}
+                color={selectedCell === item.id ? "coral" : "black"}
+                onClick={() => setSelectedCell(item.id)}
+              >
                 {headers.map((i) => (
                   <Td
                     isNumeric={i.isNumeric}
                     alignContent="center"
                     justifyContent="center"
                     textAlign="center"
+                    margin={0}
+                    onClick={() => console.log(item.id)}
+                    padding="8px"
+                    sx={{
+                      "&::hover": {
+                        backgroundColor: "lightgray",
+                      },
+                    }}
                   >
                     {item[i.code]}
                   </Td>
@@ -81,13 +99,13 @@ const MainTable: React.FC<IMainTableProps> = ({ headers, data }) => {
               </Tr>
             ))}
           </Tbody>
-          <Tfoot position="sticky" bottom={0}>
+          <Tfoot position="sticky" bottom={0} backgroundColor="white">
             <Tr margin={8}>
               {headers.map((item) => {
                 if (item.isNumeric) {
                   return (
                     <Th isNumeric textAlign="center">
-                      {sumAll({ key: item.code })}
+                      {data.reduce((acc, curr) => acc + curr[item.code], 0)}
                     </Th>
                   );
                 }

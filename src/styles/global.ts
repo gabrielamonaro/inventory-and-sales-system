@@ -7,7 +7,7 @@ export default createGlobalStyle`
     outline: 0;
     box-sizing: border-box;
     outline:0;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 
   body {

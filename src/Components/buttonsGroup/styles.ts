@@ -2,17 +2,16 @@ import { Link } from "@chakra-ui/react";
 import styled, { css } from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
-  width: 250px;
+  width: 200px;
   background-color: white;
-  z-index: 999;
   position: absolute;
-
+  right: 0;
+  top: 150px;
   transition: 200ms;
-  box-shadow: 1px 0px 10px lightgray;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  padding: 4px;
 `;
 
 export const ContainerOptions = styled.div`
